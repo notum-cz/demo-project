@@ -4,6 +4,8 @@ FROM node:16-alpine
 
 ARG NODE_ENV=development
 
+ENV PORT=$PORT
+
 WORKDIR /opt/
 COPY ./strapi/package.json ./
 COPY ./strapi/yarn.lock ./
@@ -13,5 +15,6 @@ RUN yarn install
 WORKDIR /opt/app
 COPY ./strapi/ .
 RUN yarn build
-EXPOSE 1337
+EXPOSE $PORT
+
 CMD ["yarn", "develop"]
